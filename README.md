@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Insynk Movies
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is [react](https://github.com/facebook/create-react-app) project .
 
 ## Available Scripts
 
