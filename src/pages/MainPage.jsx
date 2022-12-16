@@ -1,10 +1,12 @@
 import { useState,useEffect} from 'react'
 import Header from '../components/Header'
 import Card from '../components/Cards'
+import CardModal from '../components/CardModal'
 
 const Index = () => {
   const [title,setTitle] = useState("")
   const [movies,setMovies] = useState([])
+  const [openModal,setOpenModal] = useState("false")
   const getMovies=async (title)=>{
     let response
     if(!title){
@@ -29,6 +31,8 @@ const Index = () => {
             return(
               
                 <Card 
+                openModal={openModal} 
+                setOpenModal={setOpenModal} 
                 key={movie.id}
                 id={movie.id}
                 // img={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
@@ -41,6 +45,11 @@ const Index = () => {
             }
         </div>
       </div>
+      <CardModal 
+      open={openModal} 
+      setOpen={setOpenModal} 
+      // movieId={movieId}
+      />
     </div>
   )
 }
