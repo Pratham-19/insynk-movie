@@ -6,10 +6,14 @@ const CardModal = (props) => {
   },[props.movieId])
   const getMovieDetails=async (id)=>{
     if(id){
-      const response= await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
-    const data= await response.json()
-    console.log(data)
-    setMovie(data)
+      try{
+        const response= await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+        const data= await response.json()
+        setMovie(data)
+      }
+      catch(err){
+        console.log(err)
+      }
     }
   }
   const handleClick=()=>{
@@ -20,7 +24,8 @@ const CardModal = (props) => {
         <div className="flex flex-col bg-white w-[45vw] min-h-[60vh] max-h-max z-100 p-5">
           { 
             (!movie)?
-            <div className="text-[#000] text-center text-2xl">No data</div>:
+            <div className="text-[#000] text-center text-2xl">No data</div>
+            :
             <>
             <nav className="flex flex-row justify-between mt-1 mb-3">
             <h2 className="text-[#000] font-extrabold text-xl">

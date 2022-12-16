@@ -8,16 +8,29 @@ const Index = () => {
   const [movies,setMovies] = useState([])
   const [openModal,setOpenModal] = useState(false)
   const [movieId,setMovieId] = useState("")
+  function checkImg(movie) {
+    return movie.poster_path;
+  }
   const getMovies=async (title)=>{
     let response
     if(!title){
-      response= await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`)
+      try{
+        response= await fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&include_adult=false`)
+      }
+      catch(err){
+        console.log(err)
+      }
     }
     else{
-      response= await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${title}&page=1&include_adult=false`)
+      try{
+        response= await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${title}&page=1&include_adult=false`)
+      }
+      catch(err){
+        console.log(err)
+      }
     }
     const data= await response.json()
-    setMovies(data.results)
+    setMovies(data.results.filter(checkImg))
   }
   useEffect(() => {
     getMovies(title)
@@ -28,9 +41,10 @@ const Index = () => {
       <div>
       <div className="flex justify-center flex-wrap items-center ">
         {
+          !(movies.length===0)?
           movies.map((movie)=>{
+            // if(movie.poster_path){
             return(
-              
                 <Card 
                 key={movie.id}
                 id={movie.id}
@@ -43,7 +57,8 @@ const Index = () => {
                 setOpenModal={setOpenModal} 
                 />
                 )
-              })
+              }):
+              <div className="text-[#fff] text-center text-2xl py-20">No results, Try Again..</div>
             }
         </div>
       </div>

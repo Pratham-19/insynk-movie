@@ -1,7 +1,5 @@
-import { useState } from 'react'
 // import CardModal from './CardModal.jsx'
 const Cards = (props) => {
-    // const [openModal,setOpenModal] = useState(false)
     const handleClick=(id)=>{
         props.setMovieId(props.id)
         props.setOpenModal(true);
