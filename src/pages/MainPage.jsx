@@ -6,7 +6,8 @@ import CardModal from '../components/CardModal'
 const Index = () => {
   const [title,setTitle] = useState("")
   const [movies,setMovies] = useState([])
-  const [openModal,setOpenModal] = useState("false")
+  const [openModal,setOpenModal] = useState(false)
+  const [movieId,setMovieId] = useState("")
   const getMovies=async (title)=>{
     let response
     if(!title){
@@ -31,14 +32,15 @@ const Index = () => {
             return(
               
                 <Card 
-                openModal={openModal} 
-                setOpenModal={setOpenModal} 
                 key={movie.id}
                 id={movie.id}
                 // img={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                 img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 title={movie.title}
                 ratings={movie.vote_average}
+                setMovieId={setMovieId}
+                openModal={openModal} 
+                setOpenModal={setOpenModal} 
                 />
                 )
               })
@@ -48,7 +50,7 @@ const Index = () => {
       <CardModal 
       open={openModal} 
       setOpen={setOpenModal} 
-      // movieId={movieId}
+      movieId={movieId}
       />
     </div>
   )

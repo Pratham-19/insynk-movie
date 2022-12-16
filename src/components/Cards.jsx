@@ -3,6 +3,7 @@ import { useState } from 'react'
 const Cards = (props) => {
     // const [openModal,setOpenModal] = useState(false)
     const handleClick=(id)=>{
+        props.setMovieId(props.id)
         props.setOpenModal(true);
     }
   return (
